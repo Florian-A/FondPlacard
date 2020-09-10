@@ -18,7 +18,8 @@ Si vous avez le temps ou pour une version 1.2, nous aimerions également permett
 
 ## Entités
 ![Diagramme d'entités](conception/fond-placard-class.PNG)
-Le diagramme est relativement simple, il ne prend pas en compte les corrections et leur validation actuellement.
+
+Le diagramme est relativement simple, il ne prend pas en compte les corrections de recette et leur validation actuellement.
 
 ## Contraintes techniques
 Pour le moment, nous souhaitons ne réaliser que l'API Rest de l'application, nous voulons ne dépendre d'aucun framework, aussi pour la V1, nous vous demandons de la réaliser from scratch. Ceci dit par la suite nous pourrions vouloir en utiliser, veillez donc à le permettre sans devoir recoder l'intégralité de l'application. Il faut également que l'application respecte les principes SOLID autant que faire se peut.
@@ -29,6 +30,6 @@ Vous pouvez choisir le langage que vous préférez.
 ## Résumé
 
 * Faire l'API Rest d'une appli permettant de trouver des recettes par rapport à des ingrédients
-* Pas de langage imposé
 * Coder sans framework
+* Pas de langage imposé
 * Avoir une couche business et tenter de la découpler de l'infrastructure
