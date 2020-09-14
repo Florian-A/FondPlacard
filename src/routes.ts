@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import { TestController } from "./controllers/controllers";
 
 export class Routes {
