@@ -1,0 +1,20 @@
+FROM node:10.17.0-buster
+
+ARG DOMAIN
+ENV DOMAIN ${DOMAIN}
+RUN echo $DOMAIN
+
+RUN apt-get -yqq update
+RUN DEBIAN_FRONTEND=noninteractive apt-get -yqq install -y npm
+
+RUN npm update
+
+RUN mkdir -p /var/www/html/
+WORKDIR /var/www/html/
+
+EXPOSE 80
+
+COPY ./nodejs-entrypoint.sh /usr/local/bin/nodejs-entrypoint.sh
+RUN ln -s /usr/local/bin/nodejs-entrypoint.sh /
+ENTRYPOINT ["/usr/local/bin/nodejs-entrypoint.sh"]
+CMD ["load"]

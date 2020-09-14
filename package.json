@@ -1,0 +1,23 @@
+{
+  "name": "api-fond-placard",
+  "version": "1.0.0",
+  "description": "Fond du Placard est une application communautaire permettant de donner des idées de repas aux gens.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/Florian-A/api-fond-placard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/Florian-A/api-fond-placard/issues"
+  },
+  "homepage": "https://gitlab.com/Florian-A/api-fond-placard#readme"
+}

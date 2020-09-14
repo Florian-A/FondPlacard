@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  db:
+    build:
+      context: ./
+      dockerfile: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    networks:
+      - bridge
+    ports:
+      - "3306:3306"
+    restart: on-failure
+    volumes:
+     - ${PWD}/db:/var/lib/mysql
+  node:
+    build:
+      context: ./
+      dockerfile: ${PWD}/docker/nodejs
+    ports:
+      - "80:80"
+      - "81:81"
+    volumes:
+      - ${PWD}/:/var/www/html/:cached
+
+networks:
+  bridge:
+    driver: bridge
