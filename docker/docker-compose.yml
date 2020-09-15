@@ -3,27 +3,22 @@ version: '3.5'
 services:
   db:
     build:
-      context: ./
-      dockerfile: mariadb
+      context: ${PWD}
+      dockerfile: ${PWD}/docker/postgres
     environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    networks:
-      - bridge
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 1234
     ports:
-      - "3306:3306"
+      - "5432:5432"
     restart: on-failure
     volumes:
-     - ${PWD}/db:/var/lib/mysql
+      - ${PWD}/db:/var/lib/postgresql/data
   node:
     build:
-      context: ./
+      context: ${PWD}
       dockerfile: ${PWD}/docker/nodejs
     ports:
       - "80:80"
       - "81:81"
     volumes:
       - ${PWD}/:/var/www/html/:cached
-
-networks:
-  bridge:
-    driver: bridge
