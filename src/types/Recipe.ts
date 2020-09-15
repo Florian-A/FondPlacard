@@ -1,9 +1,9 @@
 class Recipe implements IRecipe {
-    public id: number;
-    public name: string;
-    public category: string;
-    public picture: string;
-    public score: number;
+    id: number;
+    name: string;
+    category: string;
+    picture: string;
+    score: number;
 
     constructor(name,category,id?,picture?,score?) {
         this.id = id;

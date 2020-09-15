@@ -1,12 +1,17 @@
-const findAll = () => {
+export default class RRecipe extends ConnectionToDatabase
+{
+  db:any;
+
+  public findAll() {
     const recipes = `SELECT * FROM recipe`;
-    pool.query(recipes)
+    this.db.query(recipes)
       .then((res) => {
         console.log(res);
-        pool.end();
+        this.db.end();
       })
       .catch((err) => {
         console.log(err);
-        pool.end();
+        this.db.end();
       });
   };
+}
