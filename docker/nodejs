@@ -14,7 +14,8 @@ WORKDIR /var/www/html/
 
 EXPOSE 80
 
-COPY ./nodejs-entrypoint.sh /usr/local/bin/nodejs-entrypoint.sh
+COPY ./docker/nodejs-entrypoint.sh /usr/local/bin/nodejs-entrypoint.sh
 RUN ln -s /usr/local/bin/nodejs-entrypoint.sh /
 ENTRYPOINT ["/usr/local/bin/nodejs-entrypoint.sh"]
 CMD ["load"]
+
