@@ -1,6 +1,6 @@
 export default class ConnectionToDatabase
 {
-  db:any;
+  dbConnection:any;
   config:any;
   pg:any;
 
@@ -19,7 +19,7 @@ export default class ConnectionToDatabase
   }
 
   public initDatabase(): void {
-    this.db = new this.pg.Pool(this.config);
+    this.dbConnection = new this.pg.Pool(this.config);
   }
 
 }

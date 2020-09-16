@@ -6,22 +6,21 @@ export default class RecipeModel extends ConnectionToDatabas
   async findAll() {
     const query = `SELECT * FROM recipe`;
     try {
-      let res = await this.db.query(query);
-      await this.db.end();
+      let res = await this.dbConnection.query(query);
+      await this.dbConnection.end();
 
       let recipes = [];
-      recipes.push(res.rows.map(res => this.responseToRecipe(res)));
+      res.rows.forEach(res => recipes.push(this.responseToRecipe(res)));
       
       return recipes;
-
     }
     catch (err: any) {
-      this.db.end();
+      this.dbConnection.end();
       return console.log(err);
     }
   };
 
   private responseToRecipe(res) {
-    new Recipe(res.name,res.category,res.id,res.picture,res.score);
+    return new Recipe(res.name,res.category,res.id,res.picture,res.score);
   }
 }
