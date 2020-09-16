@@ -26,4 +26,16 @@ export class RecipeController {
 
     })
   }
+
+  public new(httpReq: Request, httpRes: Response) {
+
+    const recipeModel = new RecipeModel;
+
+    recipeModel.new(httpReq.body.name,httpReq.body.category,httpReq.body.picture).then(modelRes => {
+
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.send(modelRes);
+
+    })
+  }
 }

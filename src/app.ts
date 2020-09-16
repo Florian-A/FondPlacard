@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as bodyParser from "body-parser";
 import { Routes } from "./routes";
 
 class App {
@@ -7,6 +8,8 @@ class App {
 
   constructor() {
     this.app = express();
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     this.routes.routes(this.app);
   }
 }

@@ -4,8 +4,8 @@ import { Recipe } from "../types/Recipe";
 export default class RecipeModel extends ConnectionToDatabas
 {
   async findAll() {
-    const query = `SELECT * FROM recipe`;
     try {
+      const query = `SELECT * FROM recipe`;
       let res = await this.dbConnection.query(query);
       await this.dbConnection.end();
 
@@ -21,14 +21,31 @@ export default class RecipeModel extends ConnectionToDatabas
   };
 
   async findById(id) {
-    const query = `SELECT * FROM recipe WHERE id = $1`;
     try {
-      let res = await this.dbConnection.query(query, [id]);
+      const query = `SELECT * FROM recipe WHERE id = $1`;
+      const res = await this.dbConnection.query(query, [id]);
       await this.dbConnection.end();
 
       let recipe;
       res.rows.forEach(res => recipe = this.responseToRecipe(res));
       
+      return recipe;
+    }
+    catch (err: any) {
+      this.dbConnection.end();
+      return console.log(err);
+    }
+  };
+
+  async new(name,category,picture) {
+    try {
+      const query = `INSERT INTO recipe (name,category,picture) VALUES ($1,$2,$3) RETURNING id,name,category,picture`;
+      const res = await this.dbConnection.query(query, [name,category,picture]);
+      await this.dbConnection.end();
+
+      let recipe;
+      res.rows.forEach(res => recipe = this.responseToRecipe(res));
+
       return recipe;
     }
     catch (err: any) {
