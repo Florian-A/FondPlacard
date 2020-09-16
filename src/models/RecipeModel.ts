@@ -3,7 +3,7 @@ import { Recipe } from "../types/Recipe";
 
 export default class RecipeModel extends ConnectionToDatabas
 {
-  async findAll() {
+  async getAll() {
     try {
       const query = `SELECT * FROM recipe`;
       let res = await this.dbConnection.query(query);
@@ -20,7 +20,7 @@ export default class RecipeModel extends ConnectionToDatabas
     }
   };
 
-  async findById(id) {
+  async get(id) {
     try {
       const query = `SELECT * FROM recipe WHERE id = $1`;
       const res = await this.dbConnection.query(query, [id]);
@@ -63,6 +63,23 @@ export default class RecipeModel extends ConnectionToDatabas
       let recipe;
       res.rows.forEach(res => recipe = this.responseToRecipe(res));
 
+      return recipe;
+    }
+    catch (err: any) {
+      this.dbConnection.end();
+      return console.log(err);
+    }
+  };
+
+  async del(id) {
+    try {
+      const query = `DELETE FROM recipe WHERE id = $1`;
+      const res = await this.dbConnection.query(query, [id]);
+      await this.dbConnection.end();
+
+      let recipe;
+      res.rows.forEach(res => recipe = this.responseToRecipe(res));
+      
       return recipe;
     }
     catch (err: any) {

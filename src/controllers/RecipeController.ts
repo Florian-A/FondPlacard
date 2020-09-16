@@ -7,7 +7,7 @@ export class RecipeController {
   public showAll(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-    recipeModel.findAll().then(modelRes => {
+    recipeModel.getAll().then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.send(modelRes);
@@ -18,7 +18,7 @@ export class RecipeController {
   public show(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-    recipeModel.findById(httpReq.params.id).then(modelRes => {
+    recipeModel.get(httpReq.params.id).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.send(modelRes);
@@ -41,6 +41,17 @@ export class RecipeController {
 
     const recipeModel = new RecipeModel;
     recipeModel.edit(httpReq.params.id,httpReq.body.name,httpReq.body.category,httpReq.body.picture).then(modelRes => {
+
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.send(modelRes);
+
+    })
+  }
+
+  public delete(httpReq: Request, httpRes: Response) {
+
+    const recipeModel = new RecipeModel;
+    recipeModel.del(httpReq.params.id).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.send(modelRes);

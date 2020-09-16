@@ -8,7 +8,7 @@ export class Routes {
   // Assignation des controllers à une URL.
   public routes(app): void {
     app.route("/recipes").get(this.recipeController.showAll).post(this.recipeController.new);
-    app.route("/recipes/:id").get(this.recipeController.show).patch(this.recipeController.edit);
+    app.route("/recipes/:id").get(this.recipeController.show).patch(this.recipeController.edit).delete(this.recipeController.delete);
 
   }
 }
