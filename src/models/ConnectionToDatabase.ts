@@ -1,4 +1,4 @@
-class ConnectionToDatabase
+export default class ConnectionToDatabase
 {
   db:any;
   config:any;
@@ -7,25 +7,19 @@ class ConnectionToDatabase
   constructor() {
     this.pg = require('pg');
     this.config = {
+      host: 'db',
       user: 'root',
-      database: 'postgress',
+      database: 'postgres',
       password: '1234',
-      port: 3306,
-      max: 10,
-      idleTimeoutMillis: 30000,
+      port: 5432,
+      max: 1,
+      idleTimeoutMillis: 100,
     };
-    this.configDb();
-    this.testDb();
+    this.initDatabase();
   }
 
-  public configDb(): void {
+  public initDatabase(): void {
     this.db = new this.pg.Pool(this.config);
   }
 
-  public testDb(): void {
-    this.db.on('connect', () => {
-      console.log('Connected to the database.');
-    });
-  }
-  
 }
