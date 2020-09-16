@@ -18,8 +18,7 @@ export class RecipeController {
   public show(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-    const id = httpReq.params.id;
-    recipeModel.findById(id).then(modelRes => {
+    recipeModel.findById(httpReq.params.id).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.send(modelRes);
@@ -30,8 +29,18 @@ export class RecipeController {
   public new(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-
     recipeModel.new(httpReq.body.name,httpReq.body.category,httpReq.body.picture).then(modelRes => {
+
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.send(modelRes);
+
+    })
+  }
+
+  public edit(httpReq: Request, httpRes: Response) {
+
+    const recipeModel = new RecipeModel;
+    recipeModel.edit(httpReq.params.id,httpReq.body.name,httpReq.body.category,httpReq.body.picture).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.send(modelRes);
