@@ -8,5 +8,6 @@ export class Routes {
   // Assignation des controllers à une URL.
   public routes(app): void {
     app.route("/recipes").get(this.recipeController.showAll);
+    app.route("/recipes/:id").get(this.recipeController.show);
   }
 }

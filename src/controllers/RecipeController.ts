@@ -14,4 +14,16 @@ export class RecipeController {
 
     })
   }
+
+  public show(httpReq: Request, httpRes: Response) {
+
+    const recipeModel = new RecipeModel;
+    const id = httpReq.params.id;
+    recipeModel.findById(id).then(modelRes => {
+
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.send(modelRes);
+
+    })
+  }
 }

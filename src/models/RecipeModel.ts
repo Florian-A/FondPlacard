@@ -20,6 +20,23 @@ export default class RecipeModel extends ConnectionToDatabas
     }
   };
 
+  async findById(id) {
+    const query = `SELECT * FROM recipe WHERE id = $1`;
+    try {
+      let res = await this.dbConnection.query(query, [id]);
+      await this.dbConnection.end();
+
+      let recipe;
+      res.rows.forEach(res => recipe = this.responseToRecipe(res));
+      
+      return recipe;
+    }
+    catch (err: any) {
+      this.dbConnection.end();
+      return console.log(err);
+    }
+  };
+
   private responseToRecipe(res) {
     return new Recipe(res.name,res.category,res.id,res.picture,res.score);
   }
