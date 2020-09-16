@@ -1,4 +1,5 @@
 import ConnectionToDatabas from "./ConnectionToDatabase";
+import { Recipe } from "../types/Recipe";
 
 export default class RecipeModel extends ConnectionToDatabas
 {
@@ -7,11 +8,20 @@ export default class RecipeModel extends ConnectionToDatabas
     try {
       let res = await this.db.query(query);
       await this.db.end();
-      return res.rows;
+
+      let recipes = [];
+      recipes.push(res.rows.map(res => this.responseToRecipe(res)));
+      
+      return recipes;
+
     }
     catch (err: any) {
       this.db.end();
       return console.log(err);
     }
   };
+
+  private responseToRecipe(res) {
+    new Recipe(res.name,res.category,res.id,res.picture,res.score);
+  }
 }

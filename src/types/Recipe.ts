@@ -1,4 +1,5 @@
-class Recipe implements IRecipe {
+import { RecipeInterface } from "./RecipeInterface";
+export class Recipe implements RecipeInterface {
     id: number;
     name: string;
     category: string;

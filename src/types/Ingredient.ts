@@ -1,4 +1,5 @@
-class Ingredient implements IIngredient {
+import { IngredientInterface } from "./IngredientInterface";
+class Ingredient implements IngredientInterface {
     id: number;
     name: string;
 
@@ -6,7 +7,6 @@ class Ingredient implements IIngredient {
         this.id = id;
         this.name = name;
     }
-
     public getId(): number {
         return this.id;
     }
