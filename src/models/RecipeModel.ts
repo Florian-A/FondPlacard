@@ -5,7 +5,7 @@ export default class RecipeModel extends ConnectionToDatabas
 {
   async getAll() {
     try {
-      const query = `SELECT * FROM recipe`;
+      const query = `SELECT * FROM recipe ORDER BY id`;
       let res = await this.dbConnection.query(query);
       await this.dbConnection.end();
 
@@ -74,13 +74,8 @@ export default class RecipeModel extends ConnectionToDatabas
   async del(id) {
     try {
       const query = `DELETE FROM recipe WHERE id = $1`;
-      const res = await this.dbConnection.query(query, [id]);
+      await this.dbConnection.query(query, [id]);
       await this.dbConnection.end();
-
-      let recipe;
-      res.rows.forEach(res => recipe = this.responseToRecipe(res));
-      
-      return recipe;
     }
     catch (err: any) {
       this.dbConnection.end();

@@ -1,5 +1,5 @@
 import { IngredientInterface } from "./IngredientInterface";
-class Ingredient implements IngredientInterface {
+export class Ingredient implements IngredientInterface {
     id: number;
     name: string;
 
