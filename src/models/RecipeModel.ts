@@ -39,7 +39,19 @@ export default class RecipeModel extends ConnectionToDatabas
 
   async new(name,category,picture) {
     try {
-      const query = `INSERT INTO recipe (name,category,picture) VALUES ($1,$2,$3) RETURNING id,name,category,picture`;
+      const query = `
+        WITH recipe_res AS
+            (
+                INSERT INTO recipe (name, category, picture)
+                    VALUES ('name', 'category', 'picture')
+                    RETURNING id,name,category,picture
+            ),
+        jt_ingredient_recipe_res AS
+            (
+                SELECT persistmultipleids(array [1,2,3], array [4,5,6], 'jt_ingredient_recipe')
+            )
+        SELECT id,name,category,picture FROM recipe_res;
+                    `;
       const res = await this.dbConnection.query(query, [name,category,picture]);
       await this.dbConnection.end();
 
