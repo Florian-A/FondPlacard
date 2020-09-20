@@ -37,26 +37,18 @@ export default class RecipeModel extends ConnectionToDatabas
     }
   };
 
-  async new(name,category,picture) {
+  async new(name,category,picture,ingredientIdArray) {
     try {
-      const query = `
-        WITH recipe_res AS
-            (
-                INSERT INTO recipe (name, category, picture)
-                    VALUES ('name', 'category', 'picture')
-                    RETURNING id,name,category,picture
-            ),
-        jt_ingredient_recipe_res AS
-            (
-                SELECT persistmultipleids(array [1,2,3], array [4,5,6], 'jt_ingredient_recipe')
-            )
-        SELECT id,name,category,picture FROM recipe_res;
-                    `;
-      const res = await this.dbConnection.query(query, [name,category,picture]);
+      const query = `INSERT INTO recipe (name,category,picture) VALUES ($1,$2,$3) RETURNING id,name,category,picture`;
+      const recipeRes = await this.dbConnection.query(query, [name,category,picture]);
+      for (let ingredientId of ingredientIdArray) {
+        const query = `INSERT INTO jt_ingredient_recipe VALUES ($1,$2)`;
+        await this.dbConnection.query(query, [ingredientId,recipeRes.rows[0].id]);
+      }
       await this.dbConnection.end();
 
       let recipe;
-      res.rows.forEach(res => recipe = this.responseToRecipe(res));
+      recipeRes.rows.forEach(res => recipe = this.responseToRecipe(recipeRes));
 
       return recipe;
     }
