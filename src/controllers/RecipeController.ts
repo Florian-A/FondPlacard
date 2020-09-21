@@ -28,7 +28,7 @@ export class RecipeController {
   public new(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-    recipeModel.new(httpReq.body.name,httpReq.body.category,httpReq.body.picture,httpReq.body.ingredients).then(modelRes => {
+    recipeModel.new(httpReq.body.name,httpReq.body.category,httpReq.body.picture,httpReq.body.ingredientsId).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.status(201).send(modelRes);
@@ -39,7 +39,7 @@ export class RecipeController {
   public edit(httpReq: Request, httpRes: Response) {
 
     const recipeModel = new RecipeModel;
-    recipeModel.edit(httpReq.params.id,httpReq.body.name,httpReq.body.category,httpReq.body.picture).then(modelRes => {
+    recipeModel.edit(httpReq.params.id,httpReq.body.name,httpReq.body.category,httpReq.body.picture,httpReq.body.ingredientsId).then(modelRes => {
 
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.status(201).send(modelRes);
