@@ -5,7 +5,7 @@ export class Recipe implements RecipeInterface {
     category: string;
     picture: string;
     score: number;
-    ingredientsId: Array<number> = [];
+    ingredientsId: Array<number>;
 
     constructor(name,category,id?,picture?,score?,ingredientsId?) {
         this.id = id;
@@ -13,7 +13,7 @@ export class Recipe implements RecipeInterface {
         this.category = category;
         this.picture = picture;
         this.score = score;
-        this.ingredientsId = ingredientsId;
+        this.ingredientsId = ingredientsId ? ingredientsId : [];
     }
 
     public getId(): number {
