@@ -5,7 +5,7 @@ WIP
 ## Routes disponibles :
 
 
-| GET | /recipes |
+| /recipes | GET |
 |--|--|
 
 Récupération de toutes les recettes (et récupération des ID des ingrédients).
@@ -53,7 +53,7 @@ Récupération de toutes les recettes (et récupération des ID des ingrédients
 ]
 ``` 
 
-| GET | /recipes/{id} |
+| /recipes/{id} | GET |
 |--|--|
 Récupération d'une recette suivant son ID (et récupération des ID des ingrédients).
 
@@ -75,7 +75,7 @@ Récupération d'une recette suivant son ID (et récupération des ID des ingré
 ]
 ``` 
 
-| POST | /recipes |
+| /recipes | POST |
 |--|--|
 Création d'une nouvelle recette (avec ajout des ID des ingrédients).
 
@@ -109,7 +109,7 @@ Création d'une nouvelle recette (avec ajout des ID des ingrédients).
 }
 ``` 
 
-| PATCH | /recipes/{id} |
+| /recipes/{id} | PATCH |
 |--|--|
 Édition d'une recette (avec ajout / suppression d'ID d'ingrédients).
 
@@ -143,7 +143,7 @@ Création d'une nouvelle recette (avec ajout des ID des ingrédients).
 }
 ``` 
 
-| DELETE | /recipes/{id} |
+| /recipes/{id} | DELETE |
 |--|--|
 Suppression d'une recette (sans suppression des ingrédients).
 
