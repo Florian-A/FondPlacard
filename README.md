@@ -2,9 +2,10 @@
 
 WIP
 
-## Routes disponibles :
+# Routes disponibles :
 
-
+## Exposition de l'entitée recette (*Recipe*) :
+_________________
 | /recipes | GET |
 |--|--|
 
@@ -52,6 +53,7 @@ Récupération de toutes les recettes (et récupération des ID des ingrédients
     }
 ]
 ``` 
+_________________
 
 | /recipes/{id} | GET |
 |--|--|
@@ -74,6 +76,7 @@ Récupération d'une recette suivant son ID (et récupération des ID des ingré
     }
 ]
 ``` 
+_________________
 
 | /recipes | POST |
 |--|--|
@@ -108,7 +111,7 @@ Création d'une nouvelle recette (avec ajout des ID des ingrédients).
     ]
 }
 ``` 
-
+_________________
 | /recipes/{id} | PATCH |
 |--|--|
 Édition d'une recette (avec ajout / suppression d'ID d'ingrédients).
@@ -142,9 +145,10 @@ Création d'une nouvelle recette (avec ajout des ID des ingrédients).
     ]
 }
 ``` 
-
+_________________
 | /recipes/{id} | DELETE |
 |--|--|
 Suppression d'une recette (sans suppression des ingrédients).
 
 ##### Pas de corps (body) à envoyer, pas de réponse autre que le code HTTP 204.
+_________________
