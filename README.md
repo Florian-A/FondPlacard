@@ -153,6 +153,11 @@ _________________
 Suppression d'une recette (sans suppression des ingrédients).
 
 ##### Pas de corps (body) à envoyer, pas de réponse autre que le code HTTP 204.
+
+<br>
+<br>
+
+## Exposition de l'entitée ingrédient (*Ingredient*) :
 _________________
 
 | /ingredients | GET |
