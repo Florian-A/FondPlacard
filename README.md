@@ -39,8 +39,8 @@ Récupération de toutes les recettes (et récupération des ID des ingrédients
     },
     {
         "id": 3,
-        "name": "Cygne frit",
-        "category": "Grande occasion",
+        "name": "Rat frit",
+        "category": "Petite faim",
         "picture": "https://image.centre-de-l-univers/recipe/3.jpg",
         "score": 5,
         "ingredientsId": [
@@ -112,6 +112,7 @@ Création d'une nouvelle recette (avec ajout des ID des ingrédients).
 }
 ``` 
 _________________
+
 | /recipes/{id} | PATCH |
 |--|--|
 Édition d'une recette (avec ajout / suppression d'ID d'ingrédients).
@@ -146,9 +147,104 @@ _________________
 }
 ``` 
 _________________
+
 | /recipes/{id} | DELETE |
 |--|--|
 Suppression d'une recette (sans suppression des ingrédients).
+
+##### Pas de corps (body) à envoyer, pas de réponse autre que le code HTTP 204.
+_________________
+
+| /ingredients | GET |
+|--|--|
+
+Récupération de tous les ingredients.
+
+##### Retour JSON :
+```json 
+[
+  {
+    "id": 1,
+    "name": "Farine"
+  },
+  {
+    "id": 2,
+    "name": "Beurre"
+  },
+  {
+    "id": 3,
+    "name": "Chocolat"
+  },
+  {
+    "id": 4,
+    "name": "Ananas"
+  },
+  {
+    "id": 5,
+    "name": "Rat"
+  },
+  {
+    "id": 6,
+    "name": "Sel"
+  }
+]
+``` 
+_________________
+
+| /ingredients/{id} | GET |
+|--|--|
+Récupération d'un ingredient suivant son ID.
+
+##### Retour JSON :
+```json 
+{
+    "id": 1,
+    "name": "Farine"
+}
+``` 
+_________________
+
+| /ingredients | POST |
+|--|--|
+Création d'un nouvelle ingredient.
+
+##### Corps (body) JSON :
+```json 
+{
+    "name": "Pigeon"
+}
+``` 
+##### Retour JSON :
+```json 
+{
+    "id" : 7,
+    "name": "Pigeon"
+}
+``` 
+_________________
+
+| /ingredients | PATCH |
+|--|--|
+Édition d'un ingredient suivant son ID.
+
+##### Corps (body) JSON :
+```json 
+{
+    "name": "Pigeon de ville"
+}
+``` 
+##### Retour JSON :
+```json 
+{
+    "id" : 7,
+    "name": "Pigeon de ville"
+}
+``` 
+_________________
+
+| /ingredients/{id} | DELETE |
+|--|--|
+Suppression d'un ingredient suivant son ID.
 
 ##### Pas de corps (body) à envoyer, pas de réponse autre que le code HTTP 204.
 _________________
