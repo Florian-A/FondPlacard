@@ -2,6 +2,10 @@
 
 WIP
 
+*Pas de chance pour vous, le monde s'est écroulé ! Il n'y a plus rien à manger et pour survivre un jour de plus dans cet enfer vous devez manger.*
+
+*Mais quel plat peut-on se concocter avec une boite d'ananas, de la farine, du chocolat ainsi qu'un rat cloîtré au fond du placard ?*
+
 # Routes disponibles :
 
 ## Exposition de l'entitée recette (*Recipe*) :
