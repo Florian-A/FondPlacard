@@ -1,60 +1,118 @@
 import { Request, Response } from "express";
-import  RecipeModel from "../models/RecipeModel";
+import { RecipeService } from "../services/RecipeService";
+import { RecipeModel } from "../models/RecipeModel";
+import { RecipeServiceInterface } from "services/RecipeServiceInterface";
 
 export class RecipeController {
-  
-  public showAll(httpReq: Request, httpRes: Response) {
 
-    const recipeModel = new RecipeModel;
-    recipeModel.getAll().then(modelRes => {
+  private recipeService;
 
-      httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(200).send(modelRes);
-
-    })
+  constructor() {
+    this.recipeService = new RecipeService;
   }
 
-  public show(httpReq: Request, httpRes: Response) {
+  public showAll = async (httpReq: Request, httpRes: Response) => {
 
-    const recipeModel = new RecipeModel;
-    recipeModel.get(httpReq.params.id).then(modelRes => {
-
+    try {
+      const recipes = await this.recipeService.getAll()
+      if (recipes) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(200).send(recipes);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipe not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(200).send(modelRes);
+      httpRes.status(500).send({ 'Error': err });
+    }
 
-    })
   }
 
-  public new(httpReq: Request, httpRes: Response) {
+  public show = async (httpReq: Request, httpRes: Response) => {
 
-    const recipeModel = new RecipeModel;
-    recipeModel.new(httpReq.body.name,httpReq.body.category,httpReq.body.picture,httpReq.body.ingredientsId).then(modelRes => {
-
+    try {
+      const recipe = await this.recipeService.get(httpReq.params.id)
+      if (recipe) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(200).send(recipe);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipe not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(201).send(modelRes);
-
-    })
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 
-  public edit(httpReq: Request, httpRes: Response) {
+  public new = async (httpReq: Request, httpRes: Response) => {
 
-    const recipeModel = new RecipeModel;
-    recipeModel.edit(httpReq.params.id,httpReq.body.name,httpReq.body.category,httpReq.body.picture,httpReq.body.ingredientsId).then(modelRes => {
-
+    try {
+      const recipe = await this.recipeService.create(httpReq.body.name, httpReq.body.category, httpReq.body.picture, httpReq.body.ingredientsId)
+      if (recipe) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(201).send(recipe);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipe not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(201).send(modelRes);
-
-    })
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 
-  public delete(httpReq: Request, httpRes: Response) {
+  public edit = async (httpReq: Request, httpRes: Response) => {
 
-    const recipeModel = new RecipeModel;
-    recipeModel.del(httpReq.params.id).then(modelRes => {
-
+    try {
+      const recipe = await this.recipeService.get(httpReq.params.id)
+      if (recipe) {
+        const recipeEdited = await this.recipeService.edit(httpReq.params.id, httpReq.body.name, httpReq.body.category, httpReq.body.picture, httpReq.body.ingredientsId)
+        if (recipeEdited) {
+          httpRes.setHeader('Content-Type', 'application/json');
+          httpRes.status(201).send(recipeEdited);
+        }
+        else {
+          httpRes.setHeader('Content-Type', 'application/json');
+          httpRes.status(500).send({ 'Error': "Recipe edition failed" });
+        }
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipe not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(204).send(null);
+      httpRes.status(500).send({ 'Error': err });
+    }
+  }
 
-    })
+  public delete = async (httpReq: Request, httpRes: Response) => {
+
+    try {
+      const recipe = await this.recipeService.get(httpReq.params.id)
+      if (recipe) {
+        await this.recipeService.del(httpReq.params.id)
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(204).send();
+
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipe not found" });
+      }
+    }
+    catch (err: any) {
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 }

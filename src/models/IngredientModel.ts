@@ -1,4 +1,4 @@
-import ConnectionToDatabas from "./ConnectionToDatabase";
+import ConnectionToDatabas from "./DatabaseConnection";
 import { Ingredient } from "../types/Ingredient";
 
 export default class IngredientModel extends ConnectionToDatabas

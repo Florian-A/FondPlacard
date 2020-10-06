@@ -1,8 +1,7 @@
-export default class ConnectionToDatabase
-{
-  dbConnection:any;
-  config:any;
-  pg:any;
+export default class DatabaseConnection {
+  dbConnection: any;
+  config: any;
+  pg: any;
 
   constructor() {
     this.pg = require('pg');
