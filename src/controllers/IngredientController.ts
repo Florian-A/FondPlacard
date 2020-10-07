@@ -1,60 +1,115 @@
 import { Request, Response } from "express";
-import  IngredientModel from "../models/IngredientModel";
+import { IngredientService } from "../services/IngredientService";
 
 export class IngredientController {
-  
-  public showAll(httpReq: Request, httpRes: Response) {
 
-    const ingredientModel = new IngredientModel;
-    ingredientModel.getAll().then(modelRes => {
+  private ingredientService;
 
-      httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(200).send(modelRes);
-
-    })
+  constructor() {
+    this.ingredientService = new IngredientService;
   }
 
-  public show(httpReq: Request, httpRes: Response) {
+  public showAll = async (httpReq: Request, httpRes: Response) => {
 
-    const ingredientModel = new IngredientModel;
-    ingredientModel.get(httpReq.params.id).then(modelRes => {
-
+    try {
+      const ingredients = await this.ingredientService.getAll()
+      if (ingredients) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(200).send(ingredients);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Ingredients not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(200).send(modelRes);
-
-    })
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 
-  public new(httpReq: Request, httpRes: Response) {
+  public show = async (httpReq: Request, httpRes: Response) => {
 
-    const ingredientModel = new IngredientModel;
-    ingredientModel.new(httpReq.body.name).then(modelRes => {
-
+    try {
+      const ingredient = await this.ingredientService.get(httpReq.params.id)
+      if (ingredient) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(200).send(ingredient);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Ingredient not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(201).send(modelRes);
-
-    })
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 
-  public edit(httpReq: Request, httpRes: Response) {
+  public new = async (httpReq: Request, httpRes: Response) => {
 
-    const ingredientModel = new IngredientModel;
-    ingredientModel.edit(httpReq.params.id,httpReq.body.name).then(modelRes => {
-
+    try {
+      const ingredient = await this.ingredientService.create(httpReq.body.name)
+      if (ingredient) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(201).send(ingredient);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Ingredient not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(201).send(modelRes);
-
-    })
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 
-  public delete(httpReq: Request, httpRes: Response) {
+  public edit = async (httpReq: Request, httpRes: Response) => {
 
-    const ingredientModel = new IngredientModel;
-    ingredientModel.del(httpReq.params.id).then(modelRes => {
-
+    try {
+      const ingredient = await this.ingredientService.get(httpReq.params.id)
+      if (ingredient) {
+        const ingredientEdited = await this.ingredientService.edit(httpReq.params.id, httpReq.body.name)
+        if (ingredientEdited) {
+          httpRes.setHeader('Content-Type', 'application/json');
+          httpRes.status(201).send(ingredientEdited);
+        }
+        else {
+          httpRes.setHeader('Content-Type', 'application/json');
+          httpRes.status(500).send({ 'Error': "Ingredient edition failed" });
+        }
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Ingredient not found" });
+      }
+    }
+    catch (err: any) {
       httpRes.setHeader('Content-Type', 'application/json');
-      httpRes.status(204).send(null);
+      httpRes.status(500).send({ 'Error': err });
+    }
+  }
 
-    })
+  public delete = async(httpReq: Request, httpRes: Response) => {
+
+    try {
+      const ingredient = await this.ingredientService.get(httpReq.params.id)
+      if (ingredient) {
+        await this.ingredientService.del(httpReq.params.id)
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(204).send();
+
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Ingredient not found" });
+      }
+    }
+    catch (err: any) {
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.status(500).send({ 'Error': err });
+    }
   }
 }

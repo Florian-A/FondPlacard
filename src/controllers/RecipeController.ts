@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { RecipeService } from "../services/RecipeService";
-import { RecipeModel } from "../models/RecipeModel";
-import { RecipeServiceInterface } from "services/RecipeServiceInterface";
 
 export class RecipeController {
 
@@ -28,7 +26,6 @@ export class RecipeController {
       httpRes.setHeader('Content-Type', 'application/json');
       httpRes.status(500).send({ 'Error': err });
     }
-
   }
 
   public show = async (httpReq: Request, httpRes: Response) => {

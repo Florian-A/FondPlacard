@@ -1,4 +1,3 @@
-import { Recipe } from "types/Recipe";
 import { RecipeModel } from "../models/RecipeModel";
 import { RecipeServiceInterface } from "./RecipeServiceInterface";
 
@@ -19,19 +18,19 @@ export class RecipeService implements RecipeServiceInterface {
         return RecipeService.instance;
     }
 
-    public getAll = async ()  =>  {
+    public getAll: any = async () => {
         return this.recipeModel.getAll();
     }
-    public get = async (id: number) => {
+    public get: any = async (id: number) => {
         return this.recipeModel.get(id);
     }
-    public create : any = async (name: string, category: string, picture: string, ingredientsId: Array<number>) =>  {
+    public create: any = async (name: string, category: string, picture: string, ingredientsId: Array<number>) => {
         return this.recipeModel.create(name, category, picture, ingredientsId);
     }
-    public edit : any = async (id: number, name: string, category: string, picture: string, ingredientsId: Array<number>) => {
+    public edit: any = async (id: number, name: string, category: string, picture: string, ingredientsId: Array<number>) => {
         return this.recipeModel.edit(id, name, category, picture, ingredientsId);
     }
-    public del : any = async (id: number) => {
+    public del: any = async (id: number) => {
         return this.recipeModel.del(id);
     }
     vote(vote: number): any {
