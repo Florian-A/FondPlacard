@@ -74,7 +74,7 @@ export class IngredientController {
         const ingredientEdited = await this.ingredientService.edit(httpReq.params.id, httpReq.body.name)
         if (ingredientEdited) {
           httpRes.setHeader('Content-Type', 'application/json');
-          httpRes.status(201).send(ingredientEdited);
+          httpRes.status(200).send(ingredientEdited);
         }
         else {
           httpRes.setHeader('Content-Type', 'application/json');

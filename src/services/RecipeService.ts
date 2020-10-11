@@ -33,8 +33,8 @@ export class RecipeService implements RecipeServiceInterface {
     public del: any = async (id: number) => {
         return this.recipeModel.del(id);
     }
-    vote(vote: number): any {
-        console.log("WIP");
+    public vote: any = async (id: number, value: number) => {
+        return this.recipeModel.vote(id,value);
     }
     searchByIngredientID(ingredientID: number): any {
         console.log("WIP");
