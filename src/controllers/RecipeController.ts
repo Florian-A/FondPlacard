@@ -156,7 +156,20 @@ export class RecipeController {
   public search = async (httpReq: Request, httpRes: Response) => {
     
     try {
-      const recipes = await this.recipeService.searchByName(httpReq.body.name)
+      let recipes = null;
+
+      if(httpReq.body.name)
+      {
+        recipes = await this.recipeService.searchByName(httpReq.body.name)
+      }
+      else if (httpReq.body.ingredientId)
+      {
+        recipes = await this.recipeService.searchByIngredientId(httpReq.body.ingredientId)
+      }
+      else if (httpReq.body.ingredientName)
+      {
+        recipes = await this.recipeService.searchByIngredientName(httpReq.body.ingredientName)
+      }
 
       if (recipes) {
         httpRes.setHeader('Content-Type', 'application/json');
