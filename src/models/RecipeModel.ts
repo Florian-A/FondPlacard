@@ -117,6 +117,21 @@ export class RecipeModel extends ConnectionToDatabas {
     }
   };
 
+  async getByRecipeName(name) {
+    try {
+      const recipesQuery = `SELECT *, word_similarity($1,name) as similarity FROM recipe order by similarity desc limit 3`;
+      const recipesRes = await this.dbConnection.query(recipesQuery, [name]);
+
+      let recipes = [];
+      recipesRes.rows.forEach(res => recipes.push(this.responseToRecipe(res)));
+
+      return recipes;
+    }
+    catch (err: any) {
+      console.log(err);
+    }
+  };
+
   private responseToRecipe(recipe, ingredients?) {
     return new Recipe(recipe.name, recipe.category, recipe.id, recipe.picture, recipe.score, ingredients);
   }

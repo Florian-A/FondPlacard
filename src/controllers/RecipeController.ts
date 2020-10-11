@@ -118,9 +118,9 @@ export class RecipeController {
     try {
       const recipe = await this.recipeService.get(httpReq.params.id)
       if (recipe) {
-        await this.recipeService.vote(httpReq.params.id,+1)
+        const recipeVoted = await this.recipeService.vote(httpReq.params.id, +1)
         httpRes.setHeader('Content-Type', 'application/json');
-        httpRes.status(200).send(recipe);
+        httpRes.status(200).send(recipeVoted);
       }
       else {
         httpRes.setHeader('Content-Type', 'application/json');
@@ -138,10 +138,9 @@ export class RecipeController {
     try {
       const recipe = await this.recipeService.get(httpReq.params.id)
       if (recipe) {
-        await this.recipeService.vote(httpReq.params.id,-1)
+        const recipeVoted = await this.recipeService.vote(httpReq.params.id, -1)
         httpRes.setHeader('Content-Type', 'application/json');
-        httpRes.status(200).send(recipe);
-
+        httpRes.status(200).send(recipeVoted);
       }
       else {
         httpRes.setHeader('Content-Type', 'application/json');
@@ -153,4 +152,25 @@ export class RecipeController {
       httpRes.status(500).send({ 'Error': err });
     }
   }
+
+  public search = async (httpReq: Request, httpRes: Response) => {
+    
+    try {
+      const recipes = await this.recipeService.searchByName(httpReq.body.name)
+
+      if (recipes) {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(200).send(recipes);
+      }
+      else {
+        httpRes.setHeader('Content-Type', 'application/json');
+        httpRes.status(500).send({ 'Error': "Recipes not found" });
+      }
+    }
+    catch (err: any) {
+      httpRes.setHeader('Content-Type', 'application/json');
+      httpRes.status(500).send({ 'Error': err });
+    }
+  }
+
 }

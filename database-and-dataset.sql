@@ -33,3 +33,4 @@ create table jt_ingredient_recipe
             on delete cascade
 );
 
+create EXTENSION pg_trgm;

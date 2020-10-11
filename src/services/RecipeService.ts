@@ -36,13 +36,13 @@ export class RecipeService implements RecipeServiceInterface {
     public vote: any = async (id: number, value: number) => {
         return this.recipeModel.vote(id,value);
     }
+    public searchByName: any = async (name: string) => {
+        return this.recipeModel.getByRecipeName(name);
+    }
     searchByIngredientID(ingredientID: number): any {
         console.log("WIP");
     }
     searchByIngredientName(ingredientName: string): any {
-        console.log("WIP");
-    }
-    searchByName(recipeName: string): any {
         console.log("WIP");
     }
 }
