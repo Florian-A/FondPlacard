@@ -1,9 +1,29 @@
 <h1 align="center">Fond de Placard</h1>
 <p align="center"><i>(Exercice de developpement)</i></p>
 
+---
+
+
 *Pas de chance pour vous, le monde s'est écroulé ! Il n'y a plus rien à manger et pour survivre un jour de plus dans cet enfer vous devez manger.*
 
 *Mais quel plat peut-on se concocter avec une boite d'ananas, de la farine, du chocolat ainsi qu'un rat cloîtré au fond du placard ?*
+
+
+# Fonctionnement :
+
+Pour lancer le programme deux possibilités :
+
+Programmes pré-requis :
+
+ - Docker >=19
+ - docker-compose >= 1.21.0
+ - GNU bash >= 3.2
+
+Executez le fichier `database-and-dataset.sql` dans l'image docker nommé `db`.
+
+Placez vous à la racine du project et exécutez le fichier `start.bash`, pour arrêter exécutez `stop.bash` .
+
+
 
 # Routes disponibles :
 
@@ -368,34 +388,3 @@ _________________
 Suppression d'un ingredient suivant son ID.
 
 ##### Pas de corps (body) à envoyer, pas de réponse autre que le code HTTP 204.
-_________________
-
-# Fonctionnement :
-
-Pour lancer le programme deux possibilités :
-
-#### Avec Docker 😀 :
-
-Programmes pré-requis :
-
- - Docker >=19
- - docker-compose >= 1.21.0
- - GNU bash >= 3.2
-
-Executez le fichier `database-and-dataset.sql` dans l'image docker nommé `db`.
-
-Placez vous à la racine du project et exécutez le fichier `start.bash`, pour arrêter exécutez `stop.bash` .
-
-
-#### Sans Docker 😞 :
-
-Programmes pré-requis :
-
-- Node >=10.17.0 (avec rewrite activé)
-- PostgreSQL >= 12
-
-Executez le fichier `database-and-dataset.sql` dans votre base de données PostgreSQL.
-
-Puis changez les informations de connexion à la base de données locale dans le fichier : `/src/models/DatabaseConnection.ts`
-
-Enfin lancez la commande suivante : `npm install; npm run dev`
