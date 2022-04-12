@@ -1,4 +1,5 @@
-# API Fond de Placard
+<h1 align="center">Fond de Placard</h1>
+<p align="center"><i>(Exercice de developpement)</i></p>
 
 *Pas de chance pour vous, le monde s'est écroulé ! Il n'y a plus rien à manger et pour survivre un jour de plus dans cet enfer vous devez manger.*
 
@@ -6,7 +7,7 @@
 
 # Routes disponibles :
 
-## Exposition de l'entitée recette (*Recipe*) :
+### Exposition de l'entitée recette (*Recipe*) :
 _________________
 | /recipes | GET |
 |--|--|
