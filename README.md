@@ -9,7 +9,7 @@
 *Mais quel plat peut-on se concocter avec une boite d'ananas, de la farine, du chocolat ainsi qu'un rat cloîtré au fond du placard ?*
 
 
-# Fonctionnement :
+### Fonctionnement :
 
 Pour lancer le programme deux possibilités :
 
@@ -25,9 +25,9 @@ Placez vous à la racine du project et exécutez le fichier `start.bash`, pour a
 
 
 
-# Routes disponibles :
+### Routes disponibles :
 
-### Exposition de l'entitée recette (*Recipe*) :
+#### Exposition de l'entitée recette (*Recipe*) :
 _________________
 | /recipes | GET |
 |--|--|
